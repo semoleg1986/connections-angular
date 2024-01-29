@@ -1,0 +1,55 @@
+<div class="group-content">
+    <div class="group-content__header">
+        <a class="group-content__header-link" routerLink="/">
+            back to Home
+        </a>
+        <h1>{{ (groupName$ | async) || 'Loading...' }}</h1>
+        <div class="group-content__header-right">
+            <h1 class="group-content__header-title">Group</h1>
+            <button [disabled]="(timerData$ | async) !== null" mat-raised-button color="warn" (click)="updateGroup()">Update</button>
+            <h2 *ngIf="(timerData$ | async) !== null">{{ (timerData$ | async) }}</h2>
+            <button  
+                *ngIf="isCurrentUserOwner()"
+                mat-raised-button color="warn" 
+                (click)="openDeleteDialog()"
+                >
+                Delete
+              </button>
+        </div>
+    </div>
+    <div class="group-content__body" #chatContainer>
+        <div *ngIf="groupList$ | async as groupList ">
+            <div *ngFor="let message of groupList">
+                <div [ngClass]="{'group-content__body-dialog': true, 'sent-by-user': isCurrentUser(message.authorID.S)}">
+                    <p>{{ message.authorID.S }}:</p>
+                    <div class="message-time-container">
+                        <div>
+                            <p>{{ message.message.S }}</p>
+                        </div>
+                        <div>
+                            <p>{{ message.createdAt.S | date: 'dd.MM.yy HH:mm'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="group-content__form" [formGroup]="sendForm" (ngSubmit)="send()">        
+        <mat-form-field class="group-content__form-width" hideRequiredMarker appearance="outline">
+            <input formControlName="message" matInput placeholder="Type some text" type="text" id="message">
+            <mat-error *ngIf="message?.hasError('required')">Type, please!</mat-error>
+            <mat-error *ngIf="message?.hasError('minLength')">Min 2 letter</mat-error>
+        </mat-form-field>
+
+            <button 
+                mat-raised-button color="primary" 
+                class="group-content__form-button"
+                type="submit"
+                [disabled]="sendForm.invalid" 
+            >
+                Send
+            </button>
+    </form>
+    
+</div>
+

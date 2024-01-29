@@ -1,0 +1,13 @@
+.non-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    &__title {
+        text-align: center;
+        font-size: 3rem;
+        color: #333;
+    }
+}

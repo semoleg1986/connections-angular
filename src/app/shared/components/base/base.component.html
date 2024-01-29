@@ -1,0 +1,39 @@
+<mat-drawer-container class="base-container" autosize>
+    <mat-drawer #drawer class="base-container__sidenav" mode="side">
+        <div *ngIf="loggedIn" class="base-container__sidenav-icon-wrapper">
+            <button mat-fab color="warn" routerLink="/">
+                <mat-icon>home</mat-icon>
+            </button>
+            <button mat-fab color="primary" routerLink="/profile">
+                <mat-icon>person</mat-icon>
+            </button>
+        </div>
+        <div class="base-container__sidenav-icon-dark">
+            <button mat-fab color="primary">
+                <mat-icon>dark_mode</mat-icon>
+            </button>
+        </div>
+    </mat-drawer>
+  
+    <div class="base-container__content">
+        <div class="base-container__content-manage-button">
+            <app-custom-button size="small" (click)="drawer.toggle()">
+                <mat-icon>
+                    settings
+                </mat-icon>
+        
+              </app-custom-button>
+              <app-custom-button *ngIf="loggedIn" size="small" (click)="logout()">
+                <mat-icon>
+                    exit_to_app
+                </mat-icon>
+              </app-custom-button>
+        </div>
+      <main>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
+    </main>
+    </div>
+  
+  </mat-drawer-container>

@@ -1,0 +1,40 @@
+<div class="container">
+    <mat-card class="profile">
+        <mat-card-title ngClass="profile__title">Profile</mat-card-title>
+        <form class="profile__form" [formGroup]="profileForm">
+            <mat-form-field class="profile__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Uid</mat-label>
+                <input formControlName="uid" matInput placeholder="uid" type="text" [readonly]="true">
+            </mat-form-field>        
+            <mat-form-field class="profile__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput placeholder="Your e-mail">
+            </mat-form-field>
+            <mat-form-field class="profile__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Creation time</mat-label>
+                <input formControlName="created" matInput type="date" [readonly]="true">
+            </mat-form-field>
+            <div class="profile__form-width-name">
+                <mat-form-field [ngClass]="!isStaticPage ? 'profile__form-width-name-expanded' : 'profile__form-width-name-input'" hideRequiredMarker appearance="outline">
+                    <mat-label>Name</mat-label>
+                    <input formControlName="name" matInput placeholder="Your password" type="text">
+                    <mat-error *ngIf="name?.hasError('required')">Please enter a name!</mat-error>
+                    <mat-error *ngIf="name?.hasError('maxlength')">The name is too long!</mat-error>
+                    <mat-error *ngIf="name?.hasError('pattern')">Please enter a valid name!</mat-error>
+                </mat-form-field>
+                <button mat-icon-button *ngIf="isStaticPage" (click)="toggleNameEdit()">
+                    <mat-icon>edit</mat-icon>
+                </button>
+
+            </div>
+            <div *ngIf="isNameEditing" class="profile__form-update-button">
+                <button mat-raised-button color="primary" 
+                    [disabled]="profileForm.invalid"
+                    (click)="saveChanges()">
+                    Save
+                </button>
+                <button mat-raised-button color="warn" (click)="cancelChanges()">Cancel</button>
+            </div>
+        </form>
+    </mat-card>
+</div>

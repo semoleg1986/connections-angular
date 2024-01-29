@@ -1,0 +1,16 @@
+<div class="create-group">
+    <h1 mat-dialog-title>Create New Group</h1>
+        <form class="create-group__form" [formGroup]="createForm">
+            <mat-form-field class="create-group__form" hideRequiredMarker appearance="outline">
+                <mat-label>Name</mat-label>
+                <input formControlName="name" matInput placeholder="Name" type="text">
+                <mat-error *ngIf="name?.hasError('required')">Please enter a name!</mat-error>
+                <mat-error *ngIf="name?.hasError('pattern')">Please enter a valid name!</mat-error>
+            </mat-form-field>
+        </form>
+
+    <div mat-dialog-actions>
+        <button mat-raised-button color="primary" [disabled]="createForm.invalid" (click)="createGroup()">Create</button>
+        <button mat-raised-button (click)="close()">Cancel</button>
+    </div>
+</div>

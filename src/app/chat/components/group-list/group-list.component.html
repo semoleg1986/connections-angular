@@ -1,0 +1,40 @@
+<div class="group-list">
+  <div class="group-list__header">
+    <h1 class="group-list__header-title">Group list</h1>
+    <button mat-raised-button color="primary" (click)="openCreateDialog()">Create</button>
+    <h2 *ngIf="(timerData$ | async) !== null">{{ (timerData$ | async) }}</h2>
+    <button [disabled]="(timerData$ | async) !== null" mat-raised-button color="warn" (click)="updateGroup()">Update</button>
+  </div>
+  <div class="group-list__body">
+    <ng-container *ngIf="groupList$ | async as groupData; else loadingOrErrorTemplate">
+      <mat-list role="list">
+        <mat-list-item 
+          *ngFor="let item of groupData"
+          role="listitem"
+          ngClass="group-list__body-card"
+          >
+          <button 
+            class="group-list__body-card-group"  
+            mat-stroked-button [color]="isCurrentUserOwner(item) ? 'primary' : ''"
+            (click)="navigateToGroupDetails(item)"
+            >
+            <span>{{ item.name.S }}</span>
+            <span class="group-list__body-card-group-date">{{ item.createdAt.S | date: 'dd.MM.yyyy HH:mm'}}</span>
+          </button>
+          <button *ngIf="isCurrentUserOwner(item)" mat-icon-button color="warn" (click)="openDeleteDialog(item.id.S)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </ng-container>
+    
+    <ng-template #loadingOrErrorTemplate>
+      <div>
+        <p>Loading...</p>
+        <p>Error occurred while fetching group data</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+

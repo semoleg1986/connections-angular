@@ -1,0 +1,46 @@
+<div class="chat-content">
+    <div class="chat-content__header">
+        <a class="chat-content__header-link" routerLink="/">
+            back to Home
+        </a>
+        <div class="chat-content__header-right">
+            <h1 class="chat-content__header-title">Chat</h1>
+            <button [disabled]="(timerData$ | async) !== null" mat-raised-button color="warn" (click)="updateGroup()">Update</button>
+            <h2 *ngIf="(timerData$ | async) !== null">{{ (timerData$ | async) }}</h2>
+        </div>
+    </div>
+    <div class="chat-content__body">
+        <div *ngIf="messagesList$ | async as messages ">
+            <div *ngFor="let message of messages">
+                <div [ngClass]="{'chat-content__body-dialog': true, 'sent-by-user': isCurrentUser(message.authorID.S)}">
+                    <p>{{ message.authorID.S }}:</p>
+                    <div class="message-time-container">
+                        <div>
+                            <p>{{ message.message.S }}</p>
+                        </div>
+                        <div>
+                            <p>{{ message.createdAt.S | date: 'dd.MM.yy HH:mm'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form class="chat-content__form" [formGroup]="sendForm" (ngSubmit)="send()">        
+        <mat-form-field class="chat-content__form-width" hideRequiredMarker appearance="outline">
+            <input formControlName="message" matInput placeholder="Type some text" type="text" id="message">
+            <!-- <mat-error *ngIf="message?.hasError('required')">Type, please!</mat-error>
+            <mat-error *ngIf="message?.hasError('minLength')">Min 5 letter</mat-error> -->
+        </mat-form-field>
+
+            <button 
+                mat-raised-button color="primary" 
+                class="chat-content__form-button"
+                type="submit"
+                [disabled]="sendForm.invalid" 
+            >
+                Send
+            </button>
+    </form>
+</div>
+

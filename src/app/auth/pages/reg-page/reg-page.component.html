@@ -1,0 +1,49 @@
+<div class="container">
+    <mat-card ngClass="reg">
+        <mat-card-title ngClass="reg__title">Registration</mat-card-title>
+        <form class="reg__form" [formGroup]="regForm" (ngSubmit)="register()">
+            <mat-form-field class="reg__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Name</mat-label>
+                <input formControlName="name" type="text" id="name" matInput placeholder="Your Name" required>
+                <mat-error *ngIf="name?.hasError('required')">Please enter a name!</mat-error>
+                <mat-error *ngIf="name?.hasError('maxlength')">The name is too long!</mat-error>
+                <mat-error *ngIf="name?.hasError('pattern')">Please enter a valid name!</mat-error>
+            </mat-form-field>
+        
+            <mat-form-field class="reg__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Email</mat-label>
+                <input 
+                    formControlName="email" 
+                    type="email" id="email" 
+                    matInput placeholder="Your e-mail"
+                    >
+                <mat-error *ngIf="email?.hasError('required')">Please enter a e-mail!</mat-error>
+                <mat-error *ngIf="email?.hasError('email')">Please enter a valid email!</mat-error>
+                <mat-error *ngIf="email?.hasError('taken')">Email already exists!</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="reg__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput placeholder="Your password" type="password" id="password">
+                <mat-hint>Min 8 character</mat-hint>
+                <mat-error *ngIf="password?.hasError('required')">Please enter a password!</mat-error>
+                <mat-error *ngIf="password?.hasError('minlength')">The password is too short!</mat-error>
+                <mat-error *ngIf="password?.hasError('hasDigit')">Password should contain at least one digit</mat-error>
+                <mat-error *ngIf="password?.hasError('hasUpperCase')">Password should contain at least one uppercase letter</mat-error>
+                <mat-error *ngIf="password?.hasError('hasSpecialChar')">Password should contain at least one special character</mat-error>
+            </mat-form-field>
+            <div class="reg__form-button-container">
+                <button 
+                    mat-raised-button color="primary" 
+                    class="reg__form-button" 
+                    [disabled]="regForm.invalid || isSubmitting" 
+                    (click)="register()"
+                >
+                    Submit
+                </button>
+            </div>
+        </form>
+        <p>Already have an account click on<a mat-button routerLink="/auth/signin">Sign-In</a></p>
+    </mat-card>
+</div>
+

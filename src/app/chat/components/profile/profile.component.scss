@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.profile{
+    padding: 2rem;
+    &__title{
+        margin-bottom: 1rem;
+    }
+    &__form {
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+        &-width {
+            width: 100%;
+        }
+        &-width-name {
+            width: 100%;
+            &-input{
+                width: 85%;
+                padding-right: 1rem;
+            }
+            &-expanded {
+                width: 100%;
+                /* Другие стили при расширении */
+            }
+        }
+        &-update-button {
+            display: flex;
+            justify-content: space-around;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.custom-button {
+    background-color:#7986cb,;
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: white;
+    border: none;
+    cursor: pointer;
+    &.normal-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+    }
+    &.small-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 0 4px 4px 0;
+    }
+    &[disabled] {
+      background-color: #ccc;
+      color: #666;
+      cursor: not-allowed;
+      box-shadow:2px 0px 4px 0px #ccc;
+    }
+  }

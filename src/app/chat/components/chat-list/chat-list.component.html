@@ -1,0 +1,38 @@
+<div class="chat-list">
+    <div class="chat-list__header">
+      <h1 class="chat-list__header-title">People list</h1>
+      <h2 *ngIf="(timerData$ | async) !== null">{{ (timerData$ | async) }}</h2>
+      <button [disabled]="(timerData$ | async) !== null" mat-raised-button color="warn" (click)="updateChat()">Update</button>
+    </div>
+    <div class="chat-list__body">
+      <ng-container *ngIf="chatList$ | async as chatData; else loadingOrErrorTemplate">
+        <mat-list role="list">
+          <mat-list-item 
+            *ngFor="let item of chatData"
+            role="listitem"
+            ngClass="chat-list__body-card"
+            >
+            <button 
+
+              [color]="isMatchingConversation(item.uid.S) ? 'warn' : ''" 
+              *ngIf="isCurrentUser(item)" class="chat-list__body-card-group"
+              (click) = "conversationCreate(item.uid.S)"
+              mat-raised-button
+
+            >
+              <span>{{ item.name.S }}</span>
+            </button>
+          </mat-list-item>
+        </mat-list>
+      </ng-container>
+      
+      <ng-template #loadingOrErrorTemplate>
+        <div>
+          <p>Loading...</p>
+          <p>Error occurred while fetching group data</p>
+        </div>
+      </ng-template>
+  </div>
+  
+  
+  

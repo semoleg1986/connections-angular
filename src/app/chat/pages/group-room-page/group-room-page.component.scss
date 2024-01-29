@@ -1,0 +1,95 @@
+.group-content {
+    padding: 2rem 3rem;
+    
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        &-link {
+            font-weight: 500;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #423f3f;
+
+            &:hover {
+                color: #ec5555;
+            }
+        }
+
+        &-right {
+            display: flex;
+            gap: 1rem;
+        }
+    }
+
+    &__body {
+        overflow-y: auto;
+        max-height: 70vh; 
+        &-dialog {
+            padding: 1rem 1rem;
+            width: 30%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            border-radius: 1rem;
+
+            p {
+                margin: 0;
+            }
+
+            &:nth-child(odd) p:first-child {
+                font-weight: bold;
+                color: #333;
+            }
+
+            &:nth-child(odd) .message-time-container {
+                display: flex;
+                align-items: baseline;
+                justify-content: space-between;
+                width: 100%; 
+                gap: 5px;
+            }
+
+            &:nth-child(odd) p:nth-child(2) {
+                margin-top: 5px;
+
+            }
+
+            &:nth-child(odd) p:nth-child(3) {
+                font-size: 0.8em;
+                color: #888;
+            }
+            &.sent-by-user {
+                align-self: flex-end;
+                background-color: #ec5555;
+                color: white;
+                border-color: #ec5555;
+                align-self: flex-end;
+                margin-left: auto;
+            }
+        }
+    }
+    &__form {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 98%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background-color: #fff;
+        box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        &-width{
+            flex: 1;
+            margin-right: 1rem;
+        }
+    }
+}
+
+.message-time-container > div:first-child {
+    flex: 1;
+    overflow: hidden;
+    word-wrap: break-word;
+}

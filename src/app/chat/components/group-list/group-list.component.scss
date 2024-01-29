@@ -1,0 +1,27 @@
+.group-list{
+    width: 100%;
+    &__header{
+        display: flex;
+        justify-content: space-between;
+    }
+    &__body{
+        &-card{
+            padding-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &-group{
+                width: 80%;
+                text-align: left;
+                white-space: nowrap;
+                overflow: hidden;
+                margin-right: 8px;
+                margin-bottom: 1rem;
+                &-date{
+                    padding-left: 1rem;
+                    color: #999;
+                }
+            }
+        }
+    }
+}

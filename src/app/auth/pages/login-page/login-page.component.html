@@ -1,0 +1,31 @@
+<div class="container">
+    <mat-card ngClass="log">
+        <mat-card-title ngClass="log__title">Authentication</mat-card-title>
+        <form class="log__form" [formGroup]="logForm" (ngSubmit)="login()">        
+            <mat-form-field class="log__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput placeholder="Your e-mail" type="text" id="name">
+                <mat-error *ngIf="email?.hasError('required')">Please enter a e-mail!</mat-error>
+                <mat-error *ngIf="email?.hasError('email')">Please enter a valid email!</mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="log__form-width" hideRequiredMarker appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput placeholder="Your password" type="password" id="password">
+                <mat-error *ngIf="password?.hasError('required')">Please enter a password!</mat-error>
+            </mat-form-field>
+
+            <div class="log__form-button-container">
+                <button 
+                    mat-raised-button color="primary" 
+                    class="log__form-button" 
+                    [disabled]="logForm.invalid || isSubmitting" 
+                    (click)="login()"
+                >
+                    Submit
+                </button>
+            </div>
+        </form>
+        <p>Don't have an account? <a mat-button routerLink="/auth/signup">Sign-Up</a></p>
+    </mat-card>
+</div>

@@ -1,0 +1,12 @@
+.delete-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+      
+    .mat-dialog-actions {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  
